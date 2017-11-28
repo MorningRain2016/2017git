@@ -19,7 +19,7 @@ public class MainController {
 	private UserService userService;
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)
-	public String test(){
+	public String test(){//http://localhost:8080/webDemo/test
 	//实际返回的是views/test.jsp ,spring-mvc.xml中配置过前后缀
 		int a=1;
 		return "test";
@@ -60,7 +60,7 @@ public class MainController {
 	
 	@RequestMapping(value = "getUser", method = RequestMethod.GET)
 	@ResponseBody
-    public String getUser(){
+    public String getUser(){//http://localhost:8080/webDemo/getUser
 		Long id = new Long(1);
 		User user = userService.get(id);
         
