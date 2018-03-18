@@ -60,12 +60,18 @@ public class MainController {
 	
 	@RequestMapping(value = "getUser", method = RequestMethod.GET)
 	@ResponseBody
-    public String getUser(){//http://localhost:8080/webDemo/getUser
+    public String getUser(Long userId){//http://localhost:8080/webDemo/getUser
 		Long id = new Long(1);
-		User user = userService.get(id);
+//		User user = userService.get(id);
         
-        System.out.println(user.getName());
-        return user.getName();
+		User user = userService.get(userId);
+		
+		if( user == null) {
+			return "No such ID user!";
+		} else {
+			System.out.println(user.getName());
+	        return user.getName();
+		}
     }
 	
 }
