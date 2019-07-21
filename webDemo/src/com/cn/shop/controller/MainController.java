@@ -14,7 +14,7 @@ import com.cn.shop.service.TestService;
 import com.cn.shop.service.UserService;
 import com.cn.shop.domain.User;
 
-//主页入口
+//主页入口 20190721
 @Controller
 public class MainController {
 	
