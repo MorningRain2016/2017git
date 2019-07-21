@@ -14,15 +14,47 @@
     <!-- 对模型视图名称的解析,在请求时模型视图名称添加前后缀 -->
     <context:component-scan base-package="com.cn.shop" />
 
+	<!--  
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="views/" />      <!-- 前缀 -->
-        <property name="suffix" value=".jsp" />   <!-- 后缀 -->
+        <property name="prefix" value="views/" /> 
+        <property name="suffix" value=".jsp" /> 
     </bean>
+    -->
+    
+    
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">    
+	    <property name="resourceLoaderPath"  value="WEB-INF/velocity/" /><!-- 設置模板放置位置-->    
+	    <property name="velocityProperties">    
+	        <props>    
+	            <prop key="directive.foreach.counter.name">loopCounter</prop>    
+	            <prop key="directive.foreach.counter.initial.value">0</prop>    
+	            <prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->    
+	            <prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->    
+	        </props>    
+	    </property>    
+	</bean> 
+
+	<!-- 配置视图的显示 -->  
+    <bean id="ViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">  
+        <property name="cache" value="true" />  
+        <property name="prefix" value="/" /><!-- 视图文件的前缀，即存放的路径 -->  
+        <property name="suffix" value=".vm" /><!-- 视图文件的后缀名 -->  
+        <!--<property name="toolboxConfigLocation" value="/WEB-INF/tools.xml" /><!–toolbox配置文件路径–>-->  
+        <property name="dateToolAttribute" value="date" /><!--日期函数名称-->  
+        <property name="numberToolAttribute" value="number" /><!--数字函数名称-->  
+        <property name="contentType" value="text/html;charset=UTF-8" />  
+        <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->  
+        <property name="exposeRequestAttributes" value="true" /><!--是否开放request属性-->  
+        <property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->  
+        
+        <property name="layoutUrl" value="default.vm" />
+    </bean> 
+    
     
     <!--这里是对静态资源的映射-->
-    <mvc:resources mapping="/js/**" location="/resources/js/" />
-    <mvc:resources mapping="/css/**" location="/resources/css/" />
-    <mvc:resources mapping="/img/**" location="/resources/img/" />
+    <mvc:resources mapping="/js/**" location="WEB-INF/resources/js/" />
+    <mvc:resources mapping="/css/**" location="WEB-INF/resources/css/" />
+    <mvc:resources mapping="/img/**" location="WEB-INF/resources/img/" />
 
 </beans>
